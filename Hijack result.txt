@@ -1,0 +1,104 @@
+Yang Mingyuan
+@a118766
+https://www.txrjy.com/thread-942745-1-1.html
+https://blog.csdn.net/mouse1598189/article/details/86708728
+
+
+
+USPR B200: ~$750
+GSM-2G antenna * 2: ~10~20
+test SIM card: 
+poweradapter: 
+
+
+result
+
+USRP Hardware Driver and USRP manual
+https://files.ettus.com/manual/
+
+guide
+https://www.oreilly.com/library/view/getting-started-with/9781491924280/ch01.html
+
+Ettus research website
+
+
+8/1
+
+release version install on ubuntu 16.04
+
+	guide - http://zhixun-wireless.top/install-and-configure-openbts-with-b210-on-ubuntu-1604
+
+	source - https://github.com/RangeNetworks/dev/releases/tag/v4.0.0
+
+self build openbts on ubuntu 12.04
+
+	https://www.oreilly.com/library/view/getting-started-with/9781491924280/ch01.html
+
+	Open Source Mobile Network Using OpenBTS and USRP 9
+
+	wget http://www.sbrac.org/files/build-gnuradio && chmod a+x build-gnuradio && ./build-gnuradio
+
+	
+///////// CMD
+systemctl list-units
+systemctl status <service>:
+lsusb
+
+///////// Error
+connect stream socket: Connection refused Is OpenBTS running?
+
+ERR 6885:6915 2023-08-02T21:33:09.7 Sockets.cpp:213:read: assertion failed:0
+
+OpenBTS Command Line Interface (CLI) utility
+Copyright 2012, 2013, 2014 Range Networks, Inc.
+Licensed under GPLv2.
+Includes libreadline, GPLv2.
+Connecting to 127.0.0.1:49300...
+connect stream socket: Connection refused
+Is OpenBTS running?
+
+%systemroot%\system32\LogFiles\Firewall\pfirewall.log
+
+/////////////////////////////////////
+
+openbts.service - OpenBTS
+   Loaded: loaded (/etc/systemd/system/openbts.service; disabled; vendor preset: enabled)
+   Active: failed (Result: exit-code) since Thu 2023-08-03 11:05:21 PDT; 2min 21s ago
+  Process: 2620 ExecStart=/OpenBTS/OpenBTS (code=exited, status=2)
+ Main PID: 2620 (code=exited, status=2)
+
+Aug 03 11:05:21 ubuntu OpenBTS[2620]: ALERT 2630:2630 2023-08-03T11:05:21.1 runTransceiver.cpp:176:main: Transceiver exiting...
+Aug 03 11:05:21 ubuntu transceiver[2630]: ALERT 2630:2630 2023-08-03T11:05:21.1 runTransceiver.cpp:176:main: Transceiver exiting...
+Aug 03 11:05:21 ubuntu OpenBTS[2620]: EMERG 2620:2627 2023-08-03T11:05:21.1 OpenBTS.cpp:185:startTransceiver: Transceiver quit with status 256. Exiting.
+Aug 03 11:05:21 ubuntu openbts[2620]: EMERG 2620:2627 2023-08-03T11:05:21.1 OpenBTS.cpp:185:startTransceiver: Transceiver quit with status 256. Exiting.
+Aug 03 11:05:21 ubuntu openbts[2620]: NOTICE 2620:2627 2023-08-03T11:05:21.1 SelfDetect.cpp:113:Exit: *** Terminating because of signal -999
+Aug 03 11:05:21 ubuntu openbts[2620]: NOTICE 2620:2627 2023-08-03T11:05:21.1 SelfDetect.cpp:120:Exit: *** Terminating /OpenBTS/OpenBTS
+Aug 03 11:05:21 ubuntu openbts[2620]: NOTICE 2620:2627 2023-08-03T11:05:21.1 SelfDetect.cpp:127:Exit: *** Removing pid file /var/run//OpenBTS.pid
+Aug 03 11:05:21 ubuntu systemd[1]: openbts.service: Main process exited, code=exited, status=2/INVALIDARGUMENT
+Aug 03 11:05:21 ubuntu systemd[1]: openbts.service: Unit entered failed state.
+Aug 03 11:05:21 ubuntu systemd[1]: openbts.service: Failed with result 'exit-code'.
+
+
+
+bruce@ubuntu:/OpenBTS$ systemctl start openbts
+bruce@ubuntu:/OpenBTS$ systemctl start openbts
+bruce@ubuntu:/OpenBTS$ systemctl status openbts
+● openbts.service - OpenBTS
+   Loaded: loaded (/etc/systemd/system/openbts.service; disabled; vendor preset: enabled)
+   Active: active (running) since Thu 2023-08-03 13:03:57 PDT; 24s ago
+ Main PID: 4284 (OpenBTS)
+   CGroup: /system.slice/openbts.service
+           ├─4284 /OpenBTS/OpenBTS
+           └─4294 ./transceiver 1
+
+Aug 03 13:04:17 ubuntu OpenBTS[4284]: [893B blob data]
+Aug 03 13:04:17 ubuntu openbts[4284]: ALERT 4284:4284 2023-08-03T13:04:17.1 TRXManager.cpp:402:tune: RXTUNE(51) failed with status -1
+Aug 03 13:04:18 ubuntu openbts[4284]: WARNING 4284:4284 2023-08-03T13:04:18.1 TRXManager.cpp:292:sendCommandPacket: TRX link timeout on attempt 1
+Aug 03 13:04:18 ubuntu OpenBTS[4284]: [81B blob data]
+Aug 03 13:04:18 ubuntu OpenBTS[4284]: -- Operating over USB 3.
+Aug 03 13:04:19 ubuntu openbts[4284]: WARNING 4284:4284 2023-08-03T13:04:19.1 TRXManager.cpp:292:sendCommandPacket: TRX link timeout on attempt 2
+Aug 03 13:04:20 ubuntu openbts[4284]: WARNING 4284:4284 2023-08-03T13:04:20.1 TRXManager.cpp:292:sendCommandPacket: TRX link timeout on attempt 3
+Aug 03 13:04:21 ubuntu openbts[4284]: WARNING 4284:4284 2023-08-03T13:04:21.1 TRXManager.cpp:292:sendCommandPacket: TRX link timeout on attempt 4
+Aug 03 13:04:21 ubuntu OpenBTS[4284]: -- Detecting internal GPSDO.... No GPSDO found
+Aug 03 13:04:21 ubuntu OpenBTS[4284]: -- Initialize CODEC control...
+
